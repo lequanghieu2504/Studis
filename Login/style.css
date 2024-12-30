@@ -1,0 +1,97 @@
+body {
+    background-color: #f8f9fa; /* Màu nền xám nhạt */
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.img {
+    width: auto;        /* Giữ kích thước tự nhiên của ảnh */
+    height: auto;       /* Tự động tính toán chiều cao */
+    max-width: 100%;    /* Không vượt quá phần tử chứa */
+    object-fit: contain; /* Đảm bảo không bị kéo giãn */
+}
+
+/* Reset toàn bộ body và căn giữa màn hình */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+/* Hiệu ứng hover của nút log in */
+.btn-primary {
+    background-color: #007bff; /* Màu nền chính */
+    color: #fff; /* Màu chữ */
+    border: none; /* Loại bỏ viền */
+    padding: 8px 16px; /* Khoảng cách bên trong nút */
+    border-radius: 5px; /* Bo tròn các góc */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Hiệu ứng chuyển đổi mượt */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+    transform: scale(1.03); /* Phóng to nhẹ khi hover */
+    cursor: pointer; /* Con trỏ chuột hiển thị khi hover */
+}
+
+
+/* Container chính */
+.login-container {
+    text-align: center; /* Căn giữa toàn bộ nội dung */
+}
+
+/* Dòng chữ "Or login with" */
+.login-text {
+    font-size: 18px;
+    margin-bottom: 8px; /* Khoảng cách dưới */
+}
+
+/* Container chứa các nút */
+.social-buttons {
+    display: flex; /* Hiển thị các nút theo hàng ngang */
+    flex-direction: row; /* Xếp theo hàng ngang */
+    justify-content: center; /* Căn giữa các nút */
+    /*Khoảng cách giữa các nút*/
+    gap: 12px;   
+    width: auto;
+}
+
+.social-buttons a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Nút logo */
+.social-button {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Bo tròn nút */
+    font-size: 24px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hiệu ứng khi hover */
+.social-button:hover {
+    transform: scale(1.1);
+    /*box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);*/
+}
+
+
+/* Màu sắc cho từng nút */
+.fb { background-color: #1877F2; }       /* Facebook xanh */
+.gmail { background-color: #EA4335; }    /* Gmail đỏ */
+.github { background-color: #1e1e1e; }  /* Twitter xanh nhạt */
+
+
