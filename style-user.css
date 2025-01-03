@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none
+}
+
+#user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+#user-header .logo {
+    width: 120px;
+    height: 77px;
+    margin-top: 4px;
+    margin-left: 6px;
+    border: 1px; 
+    border-top: 1px solid rgb(238, 238, 238); 
+    /* align-items: center; */
+    border-radius: 3px;
+    box-shadow: 0px 1px 4px rgb(158, 156, 156);
+}
+/* --- Tìm kiếm --- */
+/*.search {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+}*/
+.search {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.search input {
+    width: 500px;
+    height: 35px;
+    position: relative;
+    border-radius: 6px;
+    border: 1px;
+    cursor: text;
+    font-size: 15px;
+    padding-left: 6px;
+    box-shadow: 0 2px 4px rgb(174, 172, 172);
+}
+.search i {
+    position: absolute;
+    width: 35px;
+    height: 28px;
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 629px;
+    cursor: pointer;
+}
+
+.function {
+    margin-right: 24px;
+}
+
+.function ul {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.function ul li {
+    margin-left: 20px;
+    font-size: 20px;
+}
+.function ul li i{
+    color: black;
+}
+
+.function ul li:nth-child(5) {
+    font-size: 35px;
+}
+ /* --- Thêm ban --- */
+.function ul li:nth-child(1) {
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 130px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: rgb(70, 214, 21);
+
+}
+.function ul li:nth-child(1) i {
+    margin-right: 4px;
+    font-size: 16px;
+    color: white;
+}
+.function ul li:nth-child(1) a {
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+}
+
+/*--- Main ---*/
+#user-main {
+    display: flex;
+    height: 88.5vh;
+}
+
+#menu-left {
+    width: 5%;
+    background-color: white;
+    border: 2px solid rgb(222, 222, 222);
+}
+
+/* --- Menu --- */
+.menu {
+    width: 16%;
+    background-color: #eeeeee;
+    border-top: 2px solid rgb(222, 222, 222);
+    border-right: none;
+}
+
+.menu-top {
+    margin-bottom: 372px;
+}
+.menu-top ul  {
+    margin: 12px 0 12px 15px;
+}
+.menu-top ul li {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 12px;
+    display: flex; /* Căn chỉnh biểu tượng và văn bản trên cùng một dòng */
+    align-items: center;
+    line-height: 35px;
+}
+.menu-top ul li a {
+    color: #525151;
+}
+.menu-top ul li i {
+    font-size: 17px;
+    color: #7b7a7a;
+    margin-right: 12px;
+    display: inline-block;
+    width: 30px; /* Đặt chiều rộng cố định để căn đều */
+    text-align: center; /* Căn giữa biểu tượng */
+}
+.menu-bot {
+    display: flex;
+    margin: 0;
+    font-size: 21px;
+    width: 100%;
+    height: 45px;
+    background-color: rgb(226, 226, 226);
+    display: flex;
+    align-items: center;
+}
+
+.menu-bot-media ul {
+    display: flex;
+    border-right: 2px solid #ccc;
+    padding: 0 9px;
+}
+.menu-bot-media ul li {
+    margin: 0 9px;
+    color: black;
+}
+.menu-bot-media ul li i {
+    color: black;
+    font-size: 22px;
+}
+
+.menu-bot-setting ul {
+    display: flex;
+    padding: 0 10px;
+}
+.menu-bot-setting ul li {
+    margin: 0 9px;
+}
+.menu-bot-setting ul li i {
+    color: black;
+}
+
+#active {
+    width: 64%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(222, 222, 222);
+    border-left: none;
+}
+#support {
+    background-color: #ffffff;
+    width: 17%;
+    display: flex;
+    justify-content: center;
+    border: 2px solid rgb(222, 222, 222);
+    border-left: none;
+}
