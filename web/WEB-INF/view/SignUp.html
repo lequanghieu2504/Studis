@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="SignUp.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-box">
+            <h2>SignUp Form</h2>
+            <form id="signupForm">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" placeholder="Enter Username" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Enter Email" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Create Password" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="confirmPassword" placeholder="Retype Password" required>
+                </div>
+                <!-- Error message -->
+                <p id="errorMessage" class="error-message" style="color: red; display: none;">Passwords do not match!</p>
+                <button type="submit">Create account</button>
+            </form>
+        </div>
+    </div>
+    <script src="SignUp.js"></script>
+    <!-- Success popup -->
+<div id="successPopup" class="popup">
+    <div class="popup-content">
+        <div class="checkmark-circle">
+            <i class="fas fa-check"></i>
+        </div>
+        <h3>Account Created Successfully!</h3>
+    </div>
+</div>
+</body>
+</html>
