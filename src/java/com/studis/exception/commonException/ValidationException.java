@@ -1,16 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.studis.exception.commonException;
 
 /**
- *
- * @author ho huy
+ * Custom exception to handle validation errors.
+ * This exception is thrown when validation checks fail.
  */
 public class ValidationException extends RuntimeException {
+
+    /**
+     * Constructs a new ValidationException with the specified detail message.
+     * 
+     * @param message The detail message explaining the validation error.
+     */
     public ValidationException(String message) {
-        super(message);
+        super(message);  // Passes the message to the superclass constructor
     }
 }

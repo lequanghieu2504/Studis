@@ -9,6 +9,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.SecureRandom;
 import java.util.Base64;
+
 /**
  *
  * @author ho huy
@@ -25,9 +26,9 @@ public class HashingUtils {
     private static final String ALGORITHM = "PBKDF2WithHmacSHA256";
 
     /**
-     * Generates a random salt to be used in password hashing.
-     * The salt is a random string that ensures the uniqueness of the hash.
-     * 
+     * Generates a random salt to be used in password hashing. The salt is a
+     * random string that ensures the uniqueness of the hash.
+     *
      * @return A Base64-encoded string representing the generated salt.
      */
     public static String generateSalt() {
@@ -38,9 +39,9 @@ public class HashingUtils {
     }
 
     /**
-     * Hashes a password using the PBKDF2 algorithm with the given salt.
-     * The password and salt are combined to create a unique hash.
-     * 
+     * Hashes a password using the PBKDF2 algorithm with the given salt. The
+     * password and salt are combined to create a unique hash.
+     *
      * @param password The plain text password to be hashed.
      * @param salt The salt to be used in the hashing process.
      * @return A Base64-encoded string representing the hashed password.
@@ -49,11 +50,11 @@ public class HashingUtils {
         try {
             byte[] saltByte = Base64.getDecoder().decode(salt);  // Decode the salt from Base64 to bytes
 
-            PBEKeySpec spec = new PBEKeySpec(  // Create a PBEKeySpec with the password, salt, iterations, and key length
-                    password.toCharArray(),  // Convert password to char array
-                    saltByte,  // Salt in byte array
-                    INTERATIONS,  // Number of iterations
-                    KEY_LENGTH  // Length of the generated key in bits
+            PBEKeySpec spec = new PBEKeySpec( // Create a PBEKeySpec with the password, salt, iterations, and key length
+                    password.toCharArray(), // Convert password to char array
+                    saltByte, // Salt in byte array
+                    INTERATIONS, // Number of iterations
+                    KEY_LENGTH // Length of the generated key in bits
             );
 
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM);  // Get the key factory for PBKDF2WithHmacSHA256
@@ -68,8 +69,9 @@ public class HashingUtils {
     }
 
     /**
-     * Verifies a password by comparing the hashed password with the new hash generated from the provided password and salt.
-     * 
+     * Verifies a password by comparing the hashed password with the new hash
+     * generated from the provided password and salt.
+     *
      * @param password The plain text password to verify.
      * @param salt The salt used for hashing.
      * @param hashedPassword The stored hashed password to compare with.
@@ -78,7 +80,7 @@ public class HashingUtils {
     public static boolean verifyPassword(String password, String salt, String hashedPassword) {
         // Generate a new hash from the provided password and salt
         String newHash = hashPassword(password, salt);
-        
+
         // Compare the newly generated hash with the stored hashed password
         return newHash.equals(hashedPassword);
     }

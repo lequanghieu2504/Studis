@@ -1,61 +1,93 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Controller for handling user profile-related actions, such as email confirmation and password updates.
+ * This class manages requests for updating user information and validates input data.
  */
+
 package com.studis.controller;
 
-import com.studis.service.businessService.PasswordModificationService;
-import com.studis.service.daoService.UserRetrievalService;
+import com.studis.service.business.PasswordModificationService;
+import com.studis.service.dao.UserRetrievalService;
 import com.studis.model.dto.PasswordModificationDTO;
 import com.studis.utils.validatorUtils.UpdatePasswordValidator;
-import com.studis.utils.viewUtils.ViewHandler;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.portlet.ModelAndView;
 
 /**
- *
- * @author ho huy
+ * UserProfileController: Handles requests related to user email confirmation and password updates.
  */
+@Controller
 public class UserProfileController {
 
-    private UserRetrievalService urs = new UserRetrievalService();
-    private PasswordModificationService pms = new PasswordModificationService();
-    private UpdatePasswordValidator upv = new UpdatePasswordValidator();
+    private final UserRetrievalService urs; // Service for retrieving user data
+    private final PasswordModificationService pms; // Service for updating user passwords
+    private final UpdatePasswordValidator upv; // Utility for validating password updates
 
-    public void handleCofirmEmail(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, 
-                IOException {
-        try {
-            PasswordModificationDTO pdto = new PasswordModificationDTO(request.getParameter("confirmEmail"), null, null);
-            upv.validateEmail(pdto);
-            urs.handleExist("user_email", pdto.getEmail());
-            
-            request.setAttribute("confirmEmail", pdto.getEmail());
-            ViewHandler.forward("/public/update-password.jsp", request, response);
-        } catch (Exception e) {
-            GlobalExceptionHandler.handle(e, "index.jsp", request, response);
-        }
+    /**
+     * Constructor for injecting required services and utilities.
+     *
+     * @param urs UserRetrievalService for checking user existence
+     * @param pms PasswordModificationService for password updates
+     * @param upv UpdatePasswordValidator for validating input data
+     */
+    @Autowired
+    public UserProfileController(UserRetrievalService urs, PasswordModificationService pms, UpdatePasswordValidator upv) {
+        this.urs = urs;
+        this.pms = pms;
+        this.upv = upv;
     }
-    
-    public void handleUpdatePassword(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, 
-                IOException{
-        try {
-            PasswordModificationDTO pdto = new PasswordModificationDTO(
-                    request.getParameter("confirmEmail"), 
-                    request.getParameter("password"), 
-                    request.getParameter("confirmPassword"));
-            
-            upv.validate(pdto);
-            
-            pms.updatePassword(pdto.getEmail(), pdto.getPassword(), pdto.getConfirmPassword());
-            request.getRequestDispatcher("/public/login.jsp").forward(request, response);
-        } catch (Exception e) {
-            GlobalExceptionHandler.handle(e, "index.jsp", request, response);
-        }   
+
+    /**
+     * Handles email confirmation requests.
+     * 
+     * @param confirmEmail The email address entered by the user for confirmation
+     * @return ModelAndView directing to the "update-password" page with the confirmed email
+     */
+    @RequestMapping(value = "/confirmEmail", method = RequestMethod.POST)
+    public ModelAndView handleConfirmEmail(@RequestParam("confirmEmail") String confirmEmail) {
+        // Create a DTO for email confirmation
+        PasswordModificationDTO pdto = new PasswordModificationDTO(confirmEmail);
+
+        // Validate the email format
+        upv.validateEmail(pdto);
+
+        // Check if the email exists in the database
+        urs.handleExist("user_email", pdto.getEmail());
+
+        // Prepare the ModelAndView with the confirmed email
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("confirmEmail", pdto.getEmail()); // Pass email to the view
+        mv.setView("update-password"); // Direct to the update-password page
+        return mv;
+    }
+
+    /**
+     * Handles password update requests.
+     * 
+     * @param confirmEmail The email address associated with the user account
+     * @param password The new password entered by the user
+     * @param confirmPassword Confirmation of the new password entered by the user
+     * @return Redirects to the "index" page after successful password update
+     */
+    @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
+    public String handleUpdatePassword(
+            @RequestParam("confirmEmail") String confirmEmail,
+            @RequestParam("password") String password,
+            @RequestParam("confirmPassword") String confirmPassword) {
+        // Create a DTO for password update
+        PasswordModificationDTO pdto = new PasswordModificationDTO(confirmEmail, password, confirmPassword);
+
+        // Validate the input data, including email, password, and confirmation password
+        upv.validate(pdto);
+
+        // Update the user's password in the database
+        pms.updatePassword(pdto.getEmail(), pdto.getPassword(), pdto.getConfirmPassword());
+
+        // Redirect to the index page after successful update
+        return "index";
     }
 }

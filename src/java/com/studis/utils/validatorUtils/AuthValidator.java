@@ -1,34 +1,52 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.studis.utils.validatorUtils;
 
 import com.studis.model.dto.LoginDTO;
 import com.studis.model.dto.RegisterDTO;
-import com.studis.exception.commonException.ValidationException;
+
+import org.springframework.stereotype.Component;
 
 /**
- *
- * @author ho huy
+ * This class is responsible for validating authentication-related inputs.
+ * It ensures that login and registration data meet the required criteria (e.g., valid email, password format).
  */
+@Component
 public class AuthValidator {
-    
+
+    // Validator for validating names or email addresses
     private NameOrEmailValidator noev = new NameOrEmailValidator();
-    private PasswordValidator pv = new PasswordValidator();
     
-    public void validate(LoginDTO ldto) 
-            throws ValidationException{
+    // Validator for validating passwords
+    private PasswordValidator pv = new PasswordValidator();
+
+    /**
+     * Validates the login data (name or email and password).
+     * 
+     * @param ldto The LoginDTO object containing the login credentials to validate.
+     */
+    public void validate(LoginDTO ldto) {
+        // Validate the name or email in the login data
         noev.validate(ldto.getNameOrEmail());
+        
+        // Validate the password in the login data
         pv.validate(ldto.getPassword());
     }
-    
-    public void validate(RegisterDTO rdto)
-            throws ValidationException{
+
+    /**
+     * Validates the registration data (name, email, password, and confirm password).
+     * 
+     * @param rdto The RegisterDTO object containing the registration details to validate.
+     */
+    public void validate(RegisterDTO rdto) {
+        // Validate the name in the registration data
         noev.validate(rdto.getName());
+        
+        // Validate the email in the registration data
         noev.validate(rdto.getEmail());
+        
+        // Validate the password in the registration data
         pv.validate(rdto.getPassword());
+        
+        // Validate the confirm password in the registration data
         pv.validate(rdto.getConfirmPassword());
     }
 }
